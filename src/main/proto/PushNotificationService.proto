@@ -1,0 +1,13 @@
+syntax = "proto3";
+package my.grpc.gateway;
+
+message NotificationMessage {
+  string notification = 1;
+}
+
+message AckMessage {
+}
+
+service PushNotificationService {
+  rpc notify(stream NotificationMessage) returns (stream NotificationMessage);
+}

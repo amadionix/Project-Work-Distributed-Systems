@@ -1,0 +1,27 @@
+syntax = "proto3";
+package my.grpc;
+
+message NodeMessage {
+  string id = 1;
+  string ip = 2;
+  string port = 3;
+}
+
+message AckMessage {
+  bool received = 1;
+}
+
+message TokenMessage {
+  string previousNodeId = 1;
+  double pollutionValuesSum = 2;
+  int64 samplesCount = 3;
+  int64 ringSize = 4;
+
+}
+
+service P2PNetService {
+  rpc addNodeToList(NodeMessage) returns (AckMessage);
+  rpc removeNodeFromList(NodeMessage) returns (AckMessage);
+  rpc passToken(TokenMessage) returns (AckMessage);
+}
+
