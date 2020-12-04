@@ -11,7 +11,7 @@ import java.util.List;
 @Path("gateway")
 public class RestServer {
 
-    ///////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////
     // analyst API
     @Path("network-size")
     @GET
@@ -55,7 +55,7 @@ public class RestServer {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response addNode(Node node) {
+    public synchronized Response addNode(Node node) {
         if (!Nodes.contains(node.getId())) {
             Nodes.getInstance().add(node);
             Publisher.getInstance().publish("A new node entered the network.");
@@ -68,7 +68,7 @@ public class RestServer {
     @Path("remove-node")
     @DELETE
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response removeNode(Node node) {
+    public synchronized Response removeNode(Node node) {
         Nodes.getInstance().remove(node.getId());
         Publisher.getInstance().publish("A node just left the network.");
         return Response.ok().build();

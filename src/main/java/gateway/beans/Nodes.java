@@ -39,11 +39,11 @@ public class Nodes {
         return new ArrayList<>(nodes);
     }
 
-    public synchronized void add(Node node){
+    public void add(Node node){
         nodes.add(node);
     }
 
-    public synchronized void remove(String id) {
+    public void remove(String id) {
         Node node;
         int i;
         for (i = 0; i < getInstance().nodes.size(); i++) {
